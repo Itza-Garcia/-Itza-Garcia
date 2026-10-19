@@ -53,7 +53,7 @@
             <button id="msg">Send</button>
         </div>
         <div class="row">
-            <label for="n7">FeedForward Gain</label>
+            <label for="n7">FeedForward Gain (0.-1.)</label>
             <input type="number" id="n7" data-node="n_0_7" min="0" max="1" step="0.01" value="0">
         </div>
         <div class="row">
@@ -65,7 +65,7 @@
             <input type="number" id="n9" data-node="n_0_9" step="any">
         </div>
         <div class="row">
-            <label for="n12">Blend Gain</label>
+            <label for="n12">Blend Gain (0.-1.)</label>
             <input type="number" id="n12" data-node="n_0_12" min="0" max="1" step="0.01" value="0">
         </div>
     </div>
@@ -136,8 +136,9 @@
         // Number boxes: send the value whenever it changes
         document.querySelectorAll('input[data-node]').forEach((input) => {
             input.addEventListener('change', () => {
-                const value = parseFloat(input.value)
-                if (!isNaN(value)) sendMsgToWebPd(input.dataset.node, '0', [value])
+let value = parseFloat(input.value)
+value = Math.min(Math.max(value, parseFloat(input.min)), parseFloat(input.max))
+input.value = value                if (!isNaN(value)) sendMsgToWebPd(input.dataset.node, '0', [value])
             })
         })
 
