@@ -136,9 +136,8 @@
         // Number boxes: send the value whenever it changes
         document.querySelectorAll('input[data-node]').forEach((input) => {
             input.addEventListener('change', () => {
-let value = parseFloat(input.value)
-value = Math.min(Math.max(value, parseFloat(input.min)), parseFloat(input.max))
-input.value = value                if (!isNaN(value)) sendMsgToWebPd(input.dataset.node, '0', [value])
+const value = parseFloat(input.value)              
+    if (!isNaN(value)) sendMsgToWebPd(input.dataset.node, '0', [value])
             })
         })
 
